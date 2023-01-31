@@ -30,14 +30,22 @@ duration: 3 hours
   
     ```json
     [
-        {"key1": "value1", "key2": "value2"},
-        {"key1": "value1", "key2": "value2"}
+        {"key1": "value1", "key2": 2},
+        {"key1": "value2", "key2": 3}
     ]
+    ```
+  
+    ```
+    key1,key2
+    value1,2
+    value2,3
+    
+    => key1,key2\n"value1",2\n"biggervalue2",3\n
     ```
   
   - Optimized file format (**ORC**, **Parquet**, Avro)
   
-- Can also read data from other systems : HBase, Kafka, PostgreSQL, etc.
+- Can also read data from other systems : HBase, Kafka, PostgreSQL/MySQL, etc.
 
 ## Data file formats
 
@@ -45,17 +53,41 @@ duration: 3 hours
   - Split and compressed by column (binary formats)
   - Embedded statistics on data
   - Embedded schema
-  - Exemples: Apache ORC, Apache Parquet
+  - Examples: Apache ORC, Apache Parquet
 - Exchange file formats: Apache Avro, Protocol Buﬀers, Apache Arrow
 
 ![Columnar vs. Row-oriented atorage](./assets/columnar_row_storage.jpg)
 
+## What is a Hive table?
+
+- 1 Hive table:
+
+  - 1 name: e.g. `website.users`
+
+  - 1 folder in HDFS with data files: e.g. `/data/hive/website.db/users`
+
+    ```bash
+    $ hdfs dfs -ls /data/hive/website.db/users
+    /data/hive/website.db/users/221122-new-users.csv
+    /data/hive/website.db/users/231122-new-users.csv
+    /data/hive/website.db/users/...
+    ```
+
+  - 1 file format: e.g. `CSV`
+
+  - 1 schema: e.g. `firstname STRING, lastname STRING, age INT, ...`
+
+  - Statistics:
+
+    - Number of files
+    - Total size
+
 ## Hive components
 
 - **HiveServer**
-  - Translates HQL to Tez or MR jobs
+  - Translates HQL queries to Tez or MR jobs
 - **Hive Metastore** (stores data in RDBMS)
-  - Stores metadata (table names, schema, data location)
+  - Stores metadata (table names, schema, data location in HDFS)
   - Stores statistics on the tables
 - **Hive clients** (JDBC). E.g. Beeline
 
