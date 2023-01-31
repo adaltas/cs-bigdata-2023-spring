@@ -26,25 +26,26 @@ duration: 3 hours
 - Enables to query data **already** on HDFS
 
 - Supports **multiple file formats**:
+
   - Readable semi-structured (CSV, JSON…)
-  
+
     ```json
     [
-        {"key1": "value1", "key2": 2},
-        {"key1": "value2", "key2": 3}
+      { "key1": "value1", "key2": 2 },
+      { "key1": "value2", "key2": 3 }
     ]
     ```
-  
+
     ```
     key1,key2
     value1,2
     value2,3
-    
+
     => key1,key2\n"value1",2\n"biggervalue2",3\n
     ```
-  
+
   - Optimized file format (**ORC**, **Parquet**, Avro)
-  
+
 - Can also read data from other systems : HBase, Kafka, PostgreSQL/MySQL, etc.
 
 ## Data file formats
@@ -106,11 +107,30 @@ duration: 3 hours
 ## Hive partitions
 
 - Tables can (**should**) be organized in partitions
+
   - Divide a table into related parts based on the values of particular columns (e.g. **date**, country, etc.)
+
   - Enables to query parts of the data (avoid full scan)
+
   - There should not be to many (small files problem)
+
   - 1 partition = 1 subfolder in HDFS
-    - `.../products_table/p_type=book/orc_data`
+
+    ```
+    sales_table
+    ├── p_year=2020
+    │   ├── p_month=1
+    │   │   └── orc_data
+    │   └── p_month=2
+    │       └── orc_data
+    └── p_year=2021
+        └── p_month=1
+            └── orc_data
+    ```
+
+    ```sql
+    SELECT ... FROM ... WHERE p_year = 2020 AND p_month = 1;
+    ```
 
 ## Bronze/silver/gold paradigm
 
