@@ -55,3 +55,6 @@ Design a MapReduce job by defining:
 
 1. Implement the `most_frequent` MapReduce job in Python. Use the `word_count` mapper and reducer as inspiration.
 2. Run your job. Specify `-D stream.non.zero.exit.is.failure=false` to avoid troubles.
+   ```sh
+   mapred streaming -D stream.non.zero.exit.is.failure=false -files most_frequent/mapper.py,most_frequent/reducer.py -input /education/cs_2023_springbda_1/$USER/lab3/word-count -output /education/cs_2023_springbda_1/$USER/lab3/most-frequent -mapper "python3 mapper.py" -reducer "python3 reducer.py"
+   ```
