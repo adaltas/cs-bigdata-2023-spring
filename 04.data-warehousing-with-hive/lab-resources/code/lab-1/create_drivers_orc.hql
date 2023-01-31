@@ -1,4 +1,4 @@
-SET hivevar:hiveUsername=l_firstname_cs;
+SET hivevar:hiveUsername=f_lastname_cs;
 
 CREATE TABLE IF NOT EXISTS cs_2023_springbda_1.${hiveUsername}_nyc_drivers (
   driver_id INT,
