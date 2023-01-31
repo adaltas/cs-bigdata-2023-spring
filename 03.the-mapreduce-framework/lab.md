@@ -24,9 +24,9 @@ uncompromised   1
    ```bash
    git clone https://github.com/adaltas/cs-bigdata-2023-spring.git
    ```
-2. Go to the `modules/03.the-mapreduce-framework/lab-resources/code` directory:
+2. Go to the `03.the-mapreduce-framework/lab-resources/code` directory:
    ```bash
-   cd modules/03.the-mapreduce-framework/lab-resources/code
+   cd 03.the-mapreduce-framework/lab-resources/code
    ```
 3. Take a look at the `word_count/mapper.py` and `word_count/reducer.py` files. Tip: open with `vim` for syntax highlighting.
 4. Take a look at the input we will use for the MapReduce in HDFS at `/education/cs_2023_springbda_1/resources/lab3/mapred-input`
