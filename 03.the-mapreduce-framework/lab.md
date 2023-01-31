@@ -54,4 +54,4 @@ Design a MapReduce job by defining:
 ### Write the most_frequent MapReduce job
 
 1. Implement the `most_frequent` MapReduce job in Python. Use the `word_count` mapper and reducer as inspiration.
-2. Run your job. Specify `-D mapreduce.job.reduces=1` to avoid troubles.
+2. Run your job. Specify `-D stream.non.zero.exit.is.failure=false` to avoid troubles.
