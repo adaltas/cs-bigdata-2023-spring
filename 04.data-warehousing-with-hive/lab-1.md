@@ -56,7 +56,7 @@ STORED AS ORC;
 
 1. Create a managed ORC table (**not external**) that must have the same schema as the external table created above (`${username}_nyc_drivers_ext`) but with:
    1. The `_ext` prefix removed from the name: `${username}_nyc_drivers`
-   2. The column `name` devided into `first_name` and `last_name`
+   2. The column `name` divided into `first_name` and `last_name`
    3. The column `location` renamed as `address` (because `LOCATION` is a Hive keyword)
    4. The column `certified` as a `BOOLEAN`
 2. Check that your table was created using the HDFS CLI at `/warehouse/tablespace/managed/hive/cs_2023_springbda_1.db/${USER}_nyc_drivers` (should be empty)
