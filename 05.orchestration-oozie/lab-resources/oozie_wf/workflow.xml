@@ -1,0 +1,44 @@
+<workflow-app xmlns="uri:oozie:workflow:0.4" name="drivers_ingestion">
+  <global>
+    <job-tracker>${jobTracker}</job-tracker>
+    <name-node>${nameNode}</name-node>
+  </global>
+
+  <credentials>
+    <credential name="hive-creds" type="hive2">
+      <property>
+        <name>hive2.server.principal</name>
+        <value>${hivePrincipal}</value>
+      </property>
+      <property>
+        <name>hive2.jdbc.url</name>
+        <value>${jdbcUrl}</value>
+      </property>
+    </credential>
+  </credentials>
+
+  <start to="create_csv_table" />
+
+  <action name="create_csv_table" cred="hive-creds">
+    <hive2 xmlns="uri:oozie:hive2-action:0.2">
+      <jdbc-url>${jdbcUrl}</jdbc-url>
+      <script>scripts/create_drivers_ext.hql</script>
+      <param>hiveUsername=${hiveUsername}</param>
+      <param>clusterUsername=${clusterUsername}</param>
+      <param>group=${group}</param>
+    </hive2>
+
+    <!--
+      Add additional steps here.
+    -->
+
+    <ok to="end" />
+    <error to="kill_job" />
+  </action>
+
+  <kill name="kill_job">
+    <message>Job failed</message>
+  </kill>
+
+  <end name="end" />
+</workflow-app>
